@@ -31,8 +31,35 @@ paths:
           description: Bad request
         '500':
           description: Internal Server Error
+          
+  /transactions/{userId}:
+    get:
+      tags:
+        - operations
+      description: Return a list of transactions of a client
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema: 
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transactions'          
+        '400':
+          description: Bad request
+        '500':
+          description: Internal Server Error
 components:
   schemas:
+  
     Status:
       type: object
       properties:
@@ -42,3 +69,27 @@ components:
           enum:
             - up
             - down
+            
+    Transactions:
+      type: object
+      properties:
+        transactionId:
+          type: integer
+          example: 36
+        currency:
+          type: string
+          example: EUR
+        amount:
+          type: number
+          example: 144.65
+        giverId:
+          type: integer
+          example: 12
+        reciverId:
+          type: integer
+          example: 44
+        description:
+          type: string
+          example: Gym payment
+        
+        
