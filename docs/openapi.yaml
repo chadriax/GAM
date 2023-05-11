@@ -1,0 +1,44 @@
+openapi: 3.0.3
+info:
+  title: GAM - OpenAPI 3.0
+  description: This is an API example project. The goal of this API is to handle operations with Bank Account Transactions
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://localhost:8080
+paths:
+  /health:
+    get:
+      tags:
+        - metrics
+      description: Return the Service Status
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'          
+        '400':
+          description: Bad request
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    Status:
+      type: object
+      properties:
+        status:
+          type: string
+          example: up
+          enum:
+            - up
+            - down
